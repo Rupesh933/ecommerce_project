@@ -38,6 +38,7 @@ class MyAccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+# Custom user model that extends AbstractBaseUser to define the fields and behavior of the user in our application
 class Account(AbstractBaseUser):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -64,6 +65,6 @@ class Account(AbstractBaseUser):
     def has_perm(self, perm, obj=None):  # Check if the user has a specific permission
         return self.is_admin
 
-    def has_module_perm(self, add_lable): # check if the user has permissions to view the app 'add_lable'
+    def has_module_perms(self, add_lable): # check if the user has permissions to view the app 'add_lable'
         return True
 
