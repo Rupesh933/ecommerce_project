@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'category',
     'account',
+    'store',
 ]
 
 MIDDLEWARE = [
@@ -63,12 +64,16 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'category.context_processors.menu_links',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = "Ecommerce.wsgi.application"
+
+# Custom user model setting to specify that we are using a custom user model defined in the 'account' app
+AUTH_USER_MODEL = 'account.Account'  # here account is the name of the app and Account is the name of the model defined in that app
 
 
 # Database
@@ -121,3 +126,7 @@ STATIC_ROOT = BASE_DIR.parent / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR.parent / 'static'
 ]
+
+# Media files configurations (Uploaded files)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
