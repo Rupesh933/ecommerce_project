@@ -10,6 +10,7 @@ class AccountAdmin(UserAdmin):
     readonly_fields = ('last_login', 'date_joined')
     ordering = ('-date_joined',)
 
+    # we are using custom user model so we need to specify the fields to be displayed in the admin interface for adding and changing user instances
     filter_horizontal = ()
     list_filter = ()
     fieldsets = ()
