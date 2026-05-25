@@ -3,6 +3,7 @@ from store.models import Product
 from .models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
+from store.models import Variation
 
 # Create your views here.
 
@@ -15,10 +16,20 @@ def _cart_id(request):  # this is the private function
     return cart
 
 def add_cart(request, product_id):
-    color =  request.GET.get('color')
-    size = request.GET.get('size')
-    print('color and size: ',color, size)
-    return HttpResponse(color+' '+size)
+    if request.method == 'POST':
+        # color = request.POST.get('color')
+        # size = request.POST.get('size')
+        # print(color, size)
+        # return HttpResponse(color+' '+size)
+        for item in request.POST:
+            key = item
+            value = request.POST[key]
+            print(f'key: {key}, value {value}')
+
+            try :
+                variation = Variation.objects.get(variation_category__iexact=key, variation_value__iexact=value)
+            except:
+                pass
 
     product = Product.objects.get(id=product_id)  # get the product
     try:
